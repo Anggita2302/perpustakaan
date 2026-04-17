@@ -10,7 +10,7 @@ class Anggota extends Model
 
     protected $primaryKey = 'id_anggota'; // kalau PK bukan 'id'
 
-    public $timestamps = false; // kalau tabel tidak pakai created_at & updated_at
+    public $timestamps = true; // kalau tidak pakai created_at & updated_at
 
     protected $fillable = [
         'nama',
