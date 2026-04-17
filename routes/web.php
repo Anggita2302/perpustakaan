@@ -23,12 +23,8 @@ Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login-proses', [AuthController::class, 'loginProses']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
-Route::get('/dashboard', function () {
-    if (!session('login')) {
-        return redirect('/login');
-    }
-    return view('dashboard');
-});
+use App\Http\Controllers\DashboardController;
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 use App\Http\Controllers\AnggotaController;
 Route::get('/anggota', [AnggotaController::class, 'index']);
