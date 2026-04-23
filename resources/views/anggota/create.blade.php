@@ -17,6 +17,16 @@
             </div>
 
             <div class="mb-3">
+                <label>Jenis Kelamin</label>
+                <input type="text" name="jenis_kelamin" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Kelas</label>
+                <input type="text" name="kelas" class="form-control">
+            </div>
+
+            <div class="mb-3">
                 <label>Alamat</label>
                 <textarea name="alamat" class="form-control"></textarea>
             </div>
@@ -28,6 +38,7 @@
 
             <button class="btn btn-success">Simpan</button>
             <a href="/anggota" class="btn btn-danger">Cancel</a>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
 
         </form>
 

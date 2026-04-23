@@ -8,13 +8,14 @@ class Anggota extends Model
 {
     protected $table = 'public.anggota'; // nama tabel di database
 
-    protected $primaryKey = 'id_anggota'; // kalau PK bukan 'id'
+    protected $primaryKey = 'nim'; // kalau PK bukan 'id'
 
     public $timestamps = true; // kalau tidak pakai created_at & updated_at
 
     protected $fillable = [
         'nama',
-        'alamat',
-        'no_hp'
+        'jenis_kelamin',
+        'tempat_tanggal_lahir',
+        'kelas'
     ];
 }

@@ -36,27 +36,27 @@ class AnggotaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id_anggota)
+    public function show(string $nim)
     {
-        $anggota = Anggota::find($id_anggota);
+        $anggota = Anggota::find($nim);
     return view('anggota.show', compact('anggota'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id_anggota)
+    public function edit(string $nim)
     {
-        $anggota = Anggota::find($id_anggota);
+        $anggota = Anggota::find($nim);
     return view('anggota.edit', compact('anggota'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id_anggota)
+    public function update(Request $request, string $nim)
     {
-         $anggota = Anggota::find($id_anggota);
+         $anggota = Anggota::find($nim);
     $anggota->update($request->all());
     return redirect('/anggota');
     }
@@ -64,9 +64,9 @@ class AnggotaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_anggota)
+    public function destroy(string $nim)
     {
-        $anggota = Anggota::find($id_anggota);
+        $anggota = Anggota::find($nim);
     $anggota->delete();
 
     return redirect('/anggota');

@@ -8,12 +8,22 @@
     <div class="card-header">Edit Anggota</div>
     <div class="card-body">
 
-        <form action="/anggota/update/{{ $anggota->id_anggota }}" method="POST">
+        <form action="/anggota/update/{{ $anggota->nim }}" method="POST">
             @csrf
 
             <div class="mb-3">
                 <label>Nama</label>
                 <input type="text" name="nama" value="{{ $anggota->nama }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Jenis Kelamin</label>
+                <input type="text" name="jenis_kelamin" value="{{ $anggota->jenis_kelamin }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Kelas</label>
+                <input type="text" name="kelas" value="{{ $anggota->kelas }}" class="form-control">
             </div>
 
             <div class="mb-3">
@@ -28,6 +38,7 @@
 
             <button class="btn btn-success">Update</button>
             <a href="/anggota" class="btn btn-danger">Cancel</a>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
 
         </form>
 

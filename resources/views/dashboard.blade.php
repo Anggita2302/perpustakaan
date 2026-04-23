@@ -60,9 +60,9 @@
 <div class="sidebar">
     <h4 class="text-center">📚 Perpustakaan</h4>
     <a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a>
-    <a href="#"><i class="fa fa-book"></i> Buku</a>
+    <a href="/buku"><i class="fa fa-book"></i> Buku</a>
     <a href="/anggota"><i class="fa fa-users"></i> Anggota</a>
-    <a href="#"><i class="fa fa-exchange-alt"></i> Peminjaman</a>
+    <a href="/peminjaman"><i class="fa fa-exchange-alt"></i> Peminjaman</a>
     <a href="/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
 </div>
 
