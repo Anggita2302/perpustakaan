@@ -21,48 +21,70 @@ class AnggotaController extends Controller
 
     public function store(Request $request)
     {
-        Anggota::create([
-        'nama' => $request->nama,
-        'alamat' => $request->alamat,
-        'no_hp' => $request->no_hp,
-        'email' => $request->email,
-        'password' => Hash::make($request->password), // WAJIB
-    ]);
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required',
+            'email' => 'required|email|unique:anggota,email',
+            'password' => 'required|min:6',
+        ]);
 
-    return redirect('/anggota');
+        Anggota::create([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect('/anggota')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function show(string $id_anggota)
     {
-        $anggota = Anggota::find($id_anggota);
-    return view('anggota.show', compact('anggota'));
+        $anggota = Anggota::findOrFail($id_anggota);
+        return view('anggota.show', compact('anggota'));
     }
 
     public function edit(string $id_anggota)
     {
-        $anggota = Anggota::find($id_anggota);
-    return view('anggota.edit', compact('anggota'));
+        $anggota = Anggota::findOrFail($id_anggota);
+        return view('anggota.edit', compact('anggota'));
     }
 
     public function update(Request $request, string $id_anggota)
-{
-    $anggota = Anggota::find($id_anggota);
+    {
+        $anggota = Anggota::findOrFail($id_anggota);
 
-    $anggota->update([
-        'nama' => $request->nama,
-        'alamat' => $request->alamat,
-        'no_hp' => $request->no_hp,
-        'email' => $request->email,
-    ]);
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required',
+            'email' => 'required|email',
+        ]);
 
-    return redirect('/anggota');
-}
+        $data = [
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'email' => $request->email,
+        ];
+
+        // kalau password diisi baru
+        if ($request->password) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $anggota->update($data);
+
+        return redirect('/anggota')->with('success', 'Data berhasil diupdate');
+    }
 
     public function destroy(string $id_anggota)
     {
-        $anggota = Anggota::find($id_anggota);
-    $anggota->delete();
+        $anggota = Anggota::findOrFail($id_anggota);
+        $anggota->delete();
 
-    return redirect('/anggota');
+        return redirect('/anggota')->with('success', 'Data berhasil dihapus');
     }
 }
