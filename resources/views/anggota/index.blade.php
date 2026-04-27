@@ -12,8 +12,6 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Jenis Kelamin</th>
-                <th>Kelas</th>
                 <th>Alamat</th>
                 <th>No HP</th>
                 <th>Aksi</th>
@@ -23,13 +21,11 @@
             <tr>
                 <td>{{ $no+1 }}</td>
                 <td>{{ $a->nama }}</td>
-                <td>{{ $a->jenis_kelamin }}</td>
-                <td>{{ $a->kelas }}</td>
                 <td>{{ $a->alamat }}</td>
                 <td>{{ $a->no_hp }}</td>
                 <td>
-                    <a href="/anggota/edit/{{ $a->nim }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="/anggota/delete/{{ $a->nim}}" class="btn btn-danger btn-sm">Hapus</a>
+                    <a href="/anggota/edit/{{ $a->id_anggota }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/anggota/delete/{{ $a->id_anggota}}" class="btn btn-danger btn-sm">Hapus</a>
                 </td>
             </tr>
             @endforeach

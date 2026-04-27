@@ -46,12 +46,12 @@
         </div>
     @endif
 
-    <form action="/login-proses" method="POST">
+    <form action="/login" method="POST">
         @csrf
 
         <div class="mb-3">
             <label>Email</label>
-            <input type="text" name="email" class="form-control" placeholder="Masukkan email">
+            <input type="email" name="email" class="form-control" placeholder="Masukkan email">
         </div>
 
         <div class="mb-3">

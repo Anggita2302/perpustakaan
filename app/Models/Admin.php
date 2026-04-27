@@ -13,9 +13,8 @@ class Admin extends Model
     public $timestamps = true; // kalau tidak pakai created_at & updated_at
 
     protected $fillable = [
-        'username',
-        'full_name',
+        'nama',
+        'email',
         'password'
-
     ];
 }

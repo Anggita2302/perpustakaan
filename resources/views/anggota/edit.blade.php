@@ -17,23 +17,23 @@
             </div>
 
             <div class="mb-3">
-                <label>Jenis Kelamin</label>
-                <input type="text" name="jenis_kelamin" value="{{ $anggota->jenis_kelamin }}" class="form-control">
-            </div>
-
-            <div class="mb-3">
-                <label>Kelas</label>
-                <input type="text" name="kelas" value="{{ $anggota->kelas }}" class="form-control">
-            </div>
-
-            <div class="mb-3">
                 <label>Alamat</label>
-                <textarea name="alamat" class="form-control">{{ $anggota->alamat }}</textarea>
+                <textarea type="text" name="text" class="form-control">{{ $anggota->alamat }}</textarea>
             </div>
 
             <div class="mb-3">
                 <label>No HP</label>
                 <input type="text" name="no_hp" value="{{ $anggota->no_hp }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control">
             </div>
 
             <button class="btn btn-success">Update</button>
