@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
 use App\Models\Buku;
+use App\Models\Anggota;
 
 class PeminjamanController extends Controller
 {
@@ -73,5 +74,12 @@ class PeminjamanController extends Controller
         $peminjaman->delete();
 
         return redirect('/admin/peminjaman')->with('success', 'Data berhasil dihapus');
+}
+
+    public function create()
+    {
+        $anggota = Anggota::all();
+        $buku = Buku::all();
+        return view('admin.peminjaman.create', compact('anggota', 'buku'));
 }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anggota extends Model
 {
-    protected $table = 'public.anggota'; // nama tabel di database
+    protected $table = 'anggota'; // nama tabel di database
 
     protected $primaryKey = 'id_anggota'; // kalau PK bukan 'id'
 

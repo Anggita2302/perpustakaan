@@ -43,3 +43,13 @@ Route::post('/admin/buku', [BukuController::class, 'store']);
 Route::get('/admin/buku/{id_buku}/edit', [BukuController::class, 'edit']);
 Route::put('/admin/buku/{id_buku}', [BukuController::class, 'update']);
 Route::delete('/admin/buku/{id_buku}', [BukuController::class, 'destroy']);
+
+// ADMIN KELOLA DATA ANGGOTA
+use App\Http\Controllers\Admin\AnggotaController as AdminAnggotaController;
+Route::prefix('admin')->group(function () {
+    Route::get('/anggota', [AnggotaController::class, 'index']);
+    Route::get('/anggota/create', [AnggotaController::class, 'create']);
+    Route::post('/anggota', [AnggotaController::class, 'store']);
+    Route::resource('anggota', App\Http\Controllers\Admin\AnggotaController::class);
+    Route::resource('admin/anggota', AnggotaController::class);
+});
