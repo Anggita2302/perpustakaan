@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Model
 {
-    protected $table = 'public.admin'; // nama tabel di database
+    protected $table = 'admin'; // nama tabel di database
 
     protected $primaryKey = 'id_admin'; // kalau PK bukan 'id'
 

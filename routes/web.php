@@ -2,34 +2,44 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('login');
 });
 
+// LOGIN
 use App\Http\Controllers\AuthController;
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'loginProses']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
+// DASHBOARD
 use App\Http\Controllers\DashboardController;
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
-use App\Http\Controllers\AnggotaController;
-Route::get('/anggota', [AnggotaController::class, 'index']);
-Route::get('/anggota/create', [AnggotaController::class, 'create']);
-Route::post('/anggota/store', [AnggotaController::class, 'store']);
-Route::get('/anggota/edit/{nim}', [AnggotaController::class, 'edit']);
-Route::post('/anggota/update/{nim}', [AnggotaController::class, 'update']);
-Route::get('/anggota/delete/{nim}', [AnggotaController::class, 'destroy']);
+// ADMIN
+use App\Http\Controllers\AdminController;
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
+// PEMINJAMAN
+use App\Http\Controllers\PeminjamanController;
+Route::get('/admin/peminjaman', [PeminjamanController::class, 'index']);
+Route::get('/admin/peminjaman/create', [PeminjamanController::class, 'create']); // kalau ada
+Route::post('/admin/peminjaman', [PeminjamanController::class, 'store']);
+Route::get('/admin/peminjaman/{id}/edit', [PeminjamanController::class, 'edit']);
+Route::put('/admin/peminjaman/{id}', [PeminjamanController::class, 'update']);
+Route::delete('/admin/peminjaman/{id}', [PeminjamanController::class, 'destroy']);
+
+// ANGGOTA
+use App\Http\Controllers\AnggotaController;
+Route::get('/anggota/dashboard', [AnggotaController::class, 'dashboard']);
+Route::get('/anggota/buku', [AnggotaController::class, 'buku']);
+Route::get('/anggota/peminjaman', [AnggotaController::class, 'peminjaman']);
+
+// BUKU
+use App\Http\Controllers\BukuController;
+Route::get('/admin/buku', [BukuController::class, 'index']);
+Route::get('/admin/buku/create', [BukuController::class, 'create']);
+Route::post('/admin/buku', [BukuController::class, 'store']);
+Route::get('/admin/buku/{id_buku}/edit', [BukuController::class, 'edit']);
+Route::put('/admin/buku/{id_buku}', [BukuController::class, 'update']);
+Route::delete('/admin/buku/{id_buku}', [BukuController::class, 'destroy']);

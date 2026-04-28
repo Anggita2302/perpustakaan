@@ -16,47 +16,40 @@ class AuthController extends Controller
 
     public function loginProses(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        // 🔴 CEK ADMIN DULU
+        // CEK ADMIN
         $admin = Admin::where('email', $request->email)->first();
 
         if ($admin && Hash::check($request->password, $admin->password)) {
-
             session([
                 'login' => true,
                 'role' => 'admin',
-                'nama' => $admin->nama,
-                'id' => $admin->id_admin
+                'id' => $admin->id_admin,
+                'nama' => $admin->nama
             ]);
 
-            return redirect('/dashboard');
+            return redirect('/admin/dashboard');
         }
 
-        // 🔵 CEK ANGGOTA
+        // CEK ANGGOTA
         $anggota = Anggota::where('email', $request->email)->first();
 
         if ($anggota && Hash::check($request->password, $anggota->password)) {
-
             session([
                 'login' => true,
                 'role' => 'anggota',
-                'nama' => $anggota->nama,
-                'id' => $anggota->id_anggota
+                'id' => $anggota->id_anggota,
+                'nama' => $anggota->nama
             ]);
 
-            return redirect('/dashboard');
+            return redirect('/anggota/dashboard');
         }
 
         return back()->with('error', 'Email atau password salah');
     }
 
-public function logout()
-{
-    session()->flush();
-    return redirect('/login');
-}
+    public function logout()
+    {
+        session()->flush();
+        return redirect('/login');
+    }
 }
