@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
+use App\Models\Buku;
 
 class AnggotaController extends Controller
 {
@@ -41,5 +42,11 @@ class AnggotaController extends Controller
         $peminjaman = Peminjaman::where('id_anggota', session('id'))->get();
 
         return view('anggota.peminjaman', compact('peminjaman'));
+    }
+
+    public function buku()
+    {
+        $buku = Buku::all();
+        return view('anggota.buku.index', compact('buku'));
     }
 }
