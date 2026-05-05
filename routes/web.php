@@ -28,6 +28,8 @@ Route::post('/admin/peminjaman', [PeminjamanController::class, 'store']);
 Route::get('/admin/peminjaman/{id}/edit', [PeminjamanController::class, 'edit']);
 Route::put('/admin/peminjaman/{id}', [PeminjamanController::class, 'update']);
 Route::delete('/admin/peminjaman/{id}', [PeminjamanController::class, 'destroy']);
+Route::post('/admin/peminjaman/{id}/kembalikan', [PeminjamanController::class, 'kembalikan']);
+
 
 // ANGGOTA
 use App\Http\Controllers\AnggotaController;
@@ -47,9 +49,9 @@ Route::delete('/admin/buku/{id_buku}', [BukuController::class, 'destroy']);
 // ADMIN KELOLA DATA ANGGOTA
 use App\Http\Controllers\Admin\AnggotaController as AdminAnggotaController;
 Route::prefix('admin')->group(function () {
-    Route::get('/anggota', [AnggotaController::class, 'index']);
-    Route::get('/anggota/create', [AnggotaController::class, 'create']);
-    Route::post('/anggota', [AnggotaController::class, 'store']);
-    Route::resource('anggota', App\Http\Controllers\Admin\AnggotaController::class);
-    Route::resource('admin/anggota', AnggotaController::class);
+    Route::resource('anggota', AdminAnggotaController::class);
 });
+
+use App\Http\Controllers\PengembalianController;
+Route::get('/admin/pengembalian', [PengembalianController::class, 'index']);
+

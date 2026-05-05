@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Peminjaman;
 use App\Models\Buku;
 use App\Models\Anggota;
+use App\Models\Pengembalian;
+use Carbon\Carbon;
 
 class PeminjamanController extends Controller
 {
     public function index()
     {
-        $peminjaman = Peminjaman::all();
+        $peminjaman = Peminjaman::with('pengembalian')->get();
         return view('admin.peminjaman.index', compact('peminjaman'));
     }
 
@@ -81,5 +83,49 @@ class PeminjamanController extends Controller
         $anggota = Anggota::all();
         $buku = Buku::all();
         return view('admin.peminjaman.create', compact('anggota', 'buku'));
+}
+
+    public function kembalikan($id_peminjaman)
+    {
+        $peminjaman = Peminjaman::findOrFail($id_peminjaman);
+
+        // 🔒 Cegah double klik
+        if ($peminjaman->status == 'dikembalikan') {
+            return back()->with('error', 'Buku sudah dikembalikan');
+        }
+
+        $today = Carbon::now();
+        $tglPinjam = Carbon::parse($peminjaman->tanggal_pinjam);
+
+        // ⏳ Hitung keterlambatan (misal max 7 hari)
+        $jatuhTempo = $tglPinjam->addDays(7);
+
+        if ($today->gt($jatuhTempo)) {
+            $terlambat = $today->diffInDays($jatuhTempo);
+            $denda = $terlambat * 1000;
+        } else {
+            $denda = 0;
+        }
+
+        // 💾 Simpan ke tabel pengembalian
+    Pengembalian::create([
+        'id_peminjaman' => $peminjaman->id_peminjaman,
+        'tgl_pengembalian' => $today,
+        'denda' => $denda,
+        'id_admin' => auth()->user()->id_admin ?? 1
+    ]);
+
+    // 🔄 Update peminjaman
+    $peminjaman->status = 'dikembalikan';
+    $peminjaman->tanggal_kembali = $today;
+    $peminjaman->save();
+
+    // // 📚 Tambah stok buku
+    // $buku = Buku::find($peminjaman->id_buku);
+    // if ($buku) {
+    //     $buku->stok += 1;
+    //     $buku->save();
+    // }
+     return back()->with('success', 'Buku berhasil dikembalikan');
 }
 }

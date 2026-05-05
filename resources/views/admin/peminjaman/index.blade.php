@@ -5,10 +5,10 @@
 
 <a href="/admin/peminjaman/create" class="btn btn-primary mb-3">+ Tambah Peminjaman</a>
 
-<div class="card">
+<div class="card shadow-sm border-0">
     <div class="card-body">
-        <table class="table table-bordered table-striped align-middle">
-            <thead class="text-center">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="text-center table-primary">
                 <tr>
                     <th>No</th>
                     <th>Nama Anggota</th>
@@ -16,7 +16,7 @@
                     <th>Tanggal Pinjam</th>
                     <th>Tanggal Kembali</th>
                     <th>Status</th>
-                    <th width="200px">Aksi</th>
+                    <th width="220px">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,37 +30,54 @@
                     <td>{{ $p->tanggal_pinjam }}</td>
                     <td>{{ $p->tanggal_kembali ?? '-' }}</td>
 
+                    <!-- STATUS -->
                     <td class="text-center">
                         @if($p->status == 'dipinjam')
                             <span class="badge bg-warning text-dark">Dipinjam</span>
-                        @else
-                            <span class="badge bg-success">Kembali</span>
+                        @elseif($p->status == 'dikembalikan')
+                            <span class="badge bg-success">Kembali</span><br>
+                            <small class="text-danger">
+                                Denda: Rp {{ number_format($p->pengembalian->denda ?? 0, 0, ',', '.') }}
+                            </small>
                         @endif
                     </td>
 
+                    <!-- AKSI -->
                     <td>
-                        <div class="d-flex justify-content-center gap-2">
+    <div class="d-flex justify-content-center align-items-center gap-2">
 
-                            <a href="/admin/peminjaman/{{ $p->id_peminjaman }}/edit"
-                               class="btn btn-warning btn-sm px-3">
-                                Edit
-                            </a>
+        @if($p->status == 'dipinjam')
+        <form action="/admin/peminjaman/{{ $p->id_peminjaman }}/kembalikan" method="POST" class="m-0">
+            @csrf
+            <button class="btn btn-success btn-sm">
+                Kembalikan
+            </button>
+        </form>
+        @endif
 
-                            <form action="/admin/peminjaman/{{ $p->id_peminjaman }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Yakin hapus data?')"
-                                        class="btn btn-danger btn-sm px-3">
-                                    Hapus
-                                </button>
-                            </form>
+        <a href="/admin/peminjaman/{{ $p->id_peminjaman }}/edit"
+           class="btn btn-warning btn-sm">
+            Edit
+        </a>
 
-                        </div>
-                    </td>
+        <form action="/admin/peminjaman/{{ $p->id_peminjaman }}" method="POST" class="m-0">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                    onclick="return confirm('Yakin hapus data?')"
+                    class="btn btn-danger btn-sm">
+                Hapus
+            </button>
+        </form>
+
+    </div>
+</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center">Belum ada data peminjaman</td>
+                    <td colspan="7" class="text-center text-muted">
+                        Belum ada data peminjaman
+                    </td>
                 </tr>
                 @endforelse
             </tbody>
