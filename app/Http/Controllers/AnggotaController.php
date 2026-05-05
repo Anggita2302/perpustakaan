@@ -8,8 +8,6 @@ use App\Models\Buku;
 
 class AnggotaController extends Controller
 {
-
-    // 🔐 helper login check (tanpa middleware)
     private function authCheck()
     {
         if (!session('login') || session('role') != 'anggota') {
@@ -21,7 +19,7 @@ class AnggotaController extends Controller
     {
         $this->authCheck();
 
-        $id = session('id'); // 🔥 samakan dengan login admin
+        $id = session('id'); //
 
         $totalPinjam = Peminjaman::where('id_anggota', $id)->count();
 

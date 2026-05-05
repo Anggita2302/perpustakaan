@@ -42,7 +42,7 @@ class PeminjamanController extends Controller
     public function edit($id)
 {
         $peminjaman = Peminjaman::findOrFail($id);
-        $buku = Buku::all(); // ambil semua buku
+        $buku = Buku::all();
 
         return view('admin.peminjaman.edit', compact('peminjaman', 'buku'));
 }
@@ -89,7 +89,6 @@ class PeminjamanController extends Controller
     {
         $peminjaman = Peminjaman::findOrFail($id_peminjaman);
 
-        // 🔒 Cegah double klik
         if ($peminjaman->status == 'dikembalikan') {
             return back()->with('error', 'Buku sudah dikembalikan');
         }
@@ -97,7 +96,6 @@ class PeminjamanController extends Controller
         $today = Carbon::now();
         $tglPinjam = Carbon::parse($peminjaman->tanggal_pinjam);
 
-        // ⏳ Hitung keterlambatan (misal max 7 hari)
         $jatuhTempo = $tglPinjam->addDays(7);
 
         if ($today->gt($jatuhTempo)) {
@@ -107,7 +105,6 @@ class PeminjamanController extends Controller
             $denda = 0;
         }
 
-        // 💾 Simpan ke tabel pengembalian
     Pengembalian::create([
         'id_peminjaman' => $peminjaman->id_peminjaman,
         'tgl_pengembalian' => $today,

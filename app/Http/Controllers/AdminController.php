@@ -9,8 +9,6 @@ use App\Models\Peminjaman;
 
 class AdminController extends Controller
 {
-
-    // 🔐 helper login check (tanpa middleware)
     private function authCheck()
     {
         if (!session('login') || session('role') != 'admin') {
@@ -20,7 +18,7 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $this->authCheck(); // 🔥 dipanggil di sini
+        $this->authCheck();
 
         $totalBuku = Buku::count();
         $totalPeminjaman = Peminjaman::count();
