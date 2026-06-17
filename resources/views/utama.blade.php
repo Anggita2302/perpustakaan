@@ -48,7 +48,7 @@
     </form>
 
     <a href="/login" class="btn btn-primary w-100">
-        Login Admin
+        Login
     </a>
 </div>
 

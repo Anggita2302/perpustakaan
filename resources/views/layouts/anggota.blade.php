@@ -22,9 +22,6 @@
     <div class="container">
         <a class="navbar-brand text-white" href="#">Perpustakaan</a>
         <div>
-            <a href="/anggota/dashboard" class="me-3">Dashboard</a>
-            <a href="/anggota/buku" class="me-3">Daftar Buku</a>
-            <a href="/anggota/peminjaman">Peminjaman Saya</a>
             <a href="/logout" class="ms-3">Logout</a>
         </div>
     </div>

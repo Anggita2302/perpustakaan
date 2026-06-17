@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HomeController;
-
 use App\Http\Controllers\UtamaController;
 Route::get('/', [UtamaController::class, 'index']);
 
@@ -39,8 +37,6 @@ Route::post('/admin/peminjaman/{id}/kembalikan', [PeminjamanController::class, '
 // ANGGOTA
 use App\Http\Controllers\AnggotaController;
 Route::get('/anggota/dashboard', [AnggotaController::class, 'dashboard']);
-Route::get('/anggota/buku', [AnggotaController::class, 'buku']);
-Route::get('/anggota/peminjaman', [AnggotaController::class, 'peminjaman']);
 
 // BUKU
 use App\Http\Controllers\BukuController;
@@ -50,6 +46,8 @@ Route::post('/admin/buku', [BukuController::class, 'store']);
 Route::get('/admin/buku/{id_buku}/edit', [BukuController::class, 'edit']);
 Route::put('/admin/buku/{id_buku}', [BukuController::class, 'update']);
 Route::delete('/admin/buku/{id_buku}', [BukuController::class, 'destroy']);
+Route::get('/anggota/cari-buku', [BukuController::class, 'cari'])
+    ->name('buku.cari');
 
 // ADMIN KELOLA DATA ANGGOTA
 use App\Http\Controllers\Admin\AnggotaController as AdminAnggotaController;

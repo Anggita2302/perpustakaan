@@ -45,4 +45,14 @@ class BukuController extends Controller
 
         return redirect('/admin/buku')->with('success', 'Buku berhasil dihapus');
 }
+
+    public function cari(Request $request)
+{
+        $keyword = $request->keyword;
+
+        $buku = Buku::where('judul', 'like', '%' . $keyword . '%')
+                    ->get();
+
+        return view('anggota.dashboard', compact('buku'));
+}
 }

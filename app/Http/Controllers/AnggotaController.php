@@ -19,32 +19,8 @@ class AnggotaController extends Controller
     {
         $this->authCheck();
 
-        $id = session('id'); //
+        $id = session('id');
 
-        $totalPinjam = Peminjaman::where('id_anggota', $id)->count();
-
-        $sedangPinjam = Peminjaman::where('id_anggota', $id)
-                            ->where('status', 'dipinjam')
-                            ->count();
-
-        return view('anggota.dashboard', compact(
-            'totalPinjam',
-            'sedangPinjam'
-        ));
-    }
-
-    public function peminjaman()
-    {
-        $this->authCheck();
-
-        $peminjaman = Peminjaman::where('id_anggota', session('id'))->get();
-
-        return view('anggota.peminjaman', compact('peminjaman'));
-    }
-
-    public function buku()
-    {
-        $buku = Buku::all();
-        return view('anggota.buku.index', compact('buku'));
+        return view('anggota.dashboard');
     }
 }
