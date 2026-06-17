@@ -2,7 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\UtamaController;
+Route::get('/', [UtamaController::class, 'index']);
+
+Route::get('/login', function () {
     return view('login');
 });
 

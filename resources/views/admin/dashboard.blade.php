@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h3 class="mb-4">Dashboard Admin</h3>
+<h3 class="mb-4">Halooo Admin</h3>
 
 <div class="row">
 

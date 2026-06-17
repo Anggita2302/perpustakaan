@@ -1,69 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login Perpustakaan</title>
+@extends('layouts.auth')
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('title', 'Login Perpustakaan')
 
-    <style>
-        body {
-            height: 100vh;
-            background: linear-gradient(to bottom, #6fb1fc, #4364f7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+@section('style')
+<style>
+    body{
+        height:100vh;
+        background: linear-gradient(to bottom, #6fb1fc, #4364f7);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
 
-        .login-card {
-            width: 350px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            background: white;
-            padding: 30px;
-        }
+    .login-card{
+        width:350px;
+        border-radius:15px;
+        box-shadow:0 8px 20px rgba(0,0,0,.2);
+        background:white;
+        padding:30px;
+    }
+</style>
+@endsection
 
-        .login-title {
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .btn-login {
-            width: 100%;
-            border-radius: 10px;
-        }
-    </style>
-</head>
-<body>
-
+@section('content')
 <div class="login-card">
-    <h3 class="login-title">📚 Login</h3>
-
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+    <h3 class="text-center">📚 Login</h3>
 
     <form action="/login" method="POST">
         @csrf
 
-        <div class="mb-3">
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Masukkan email">
-        </div>
+        <input type="email" name="email" class="form-control mb-3">
 
-        <div class="mb-3">
-            <label>Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Masukkan password">
-        </div>
+        <input type="password" name="password" class="form-control mb-3">
 
-        <button type="submit" class="btn btn-primary btn-login">
+        <button class="btn btn-primary w-100">
             Login
         </button>
-    </form>
-</div>
 
-</body>
-</html>
+    </form>
+
+        <a href="/" class="btn btn-danger w-100 mt-2">
+            Kembali
+        </a>
+</div>
+@endsection
