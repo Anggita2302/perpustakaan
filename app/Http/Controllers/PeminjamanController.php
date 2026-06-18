@@ -68,7 +68,7 @@ class PeminjamanController extends Controller
         ]);
 
         return redirect('/admin/peminjaman')->with('success', 'Data berhasil diupdate');
-}
+    }
 
     public function destroy($id)
     {
@@ -76,14 +76,21 @@ class PeminjamanController extends Controller
         $peminjaman->delete();
 
         return redirect('/admin/peminjaman')->with('success', 'Data berhasil dihapus');
-}
+    }
 
     public function create()
     {
         $anggota = Anggota::all();
         $buku = Buku::all();
         return view('admin.peminjaman.create', compact('anggota', 'buku'));
-}
+    }
+
+    public function indexAnggota()
+    {
+        $peminjaman = Peminjaman::all();
+
+        return view('anggota.peminjaman', compact('peminjaman'));
+    }
 
     public function kembalikan($id_peminjaman)
     {

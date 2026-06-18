@@ -15,12 +15,10 @@ class AnggotaController extends Controller
         }
     }
 
-    public function dashboard()
+        public function dashboard()
     {
-        $this->authCheck();
+        $buku = Buku::all();
 
-        $id = session('id');
-
-        return view('anggota.dashboard');
+        return view('anggota.dashboard', compact('buku'));
     }
 }

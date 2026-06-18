@@ -35,7 +35,6 @@
         <a href="/admin/anggota">Data Anggota</a>
         <a href="/admin/peminjaman">Data Peminjaman</a>
         <a href="/admin/pengembalian">Data Pengembalian</a>
-        <a href="/admin/laporan">Laporan</a>
         <a href="/logout">Logout</a>
     </div>
 
