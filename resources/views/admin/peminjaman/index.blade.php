@@ -36,9 +36,6 @@
                             <span class="badge bg-warning text-dark">Dipinjam</span>
                         @elseif($p->status == 'dikembalikan')
                             <span class="badge bg-success">Kembali</span><br>
-                            <small class="text-danger">
-                                Denda: Rp {{ number_format($p->pengembalian->denda ?? 0, 0, ',', '.') }}
-                            </small>
                         @endif
                     </td>
 

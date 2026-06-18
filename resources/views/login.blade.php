@@ -38,9 +38,5 @@
         </button>
 
     </form>
-
-        <a href="/" class="btn btn-danger w-100 mt-2">
-            Kembali
-        </a>
 </div>
 @endsection

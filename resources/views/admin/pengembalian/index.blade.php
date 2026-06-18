@@ -24,7 +24,6 @@
                             <th>Nama Anggota</th>
                             <th>Judul Buku</th>
                             <th>Tanggal Kembali</th>
-                            <th>Denda</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,19 +46,6 @@
                                 <span class="badge bg-info text-dark">
                                     {{ $p->tgl_pengembalian }}
                                 </span>
-                            </td>
-
-                            <!-- DENDA -->
-                            <td>
-                                @if($p->denda > 0)
-                                    <span class="badge bg-danger">
-                                        Rp {{ number_format($p->denda, 0, ',', '.') }}
-                                    </span>
-                                @else
-                                    <span class="badge bg-success">
-                                        Tidak ada denda
-                                    </span>
-                                @endif
                             </td>
                         </tr>
                         @empty

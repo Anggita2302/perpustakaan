@@ -18,7 +18,6 @@ class Pengembalian extends Model
     protected $fillable = [
         'id_peminjaman',
         'tgl_pengembalian',
-        'denda',
         'id_admin'
     ];
 

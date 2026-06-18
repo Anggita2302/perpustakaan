@@ -100,22 +100,11 @@ class PeminjamanController extends Controller
             return back()->with('error', 'Buku sudah dikembalikan');
         }
 
-        $today = Carbon::now();
-        $tglPinjam = Carbon::parse($peminjaman->tanggal_pinjam);
-
-        $jatuhTempo = $tglPinjam->addDays(7);
-
-        if ($today->gt($jatuhTempo)) {
-            $terlambat = $today->diffInDays($jatuhTempo);
-            $denda = $terlambat * 1000;
-        } else {
-            $denda = 0;
-        }
+    $today = Carbon::now();
 
     Pengembalian::create([
         'id_peminjaman' => $peminjaman->id_peminjaman,
         'tgl_pengembalian' => $today,
-        'denda' => $denda,
         'id_admin' => auth()->user()->id_admin ?? 1
     ]);
 
@@ -124,12 +113,6 @@ class PeminjamanController extends Controller
     $peminjaman->tanggal_kembali = $today;
     $peminjaman->save();
 
-    // // 📚 Tambah stok buku
-    // $buku = Buku::find($peminjaman->id_buku);
-    // if ($buku) {
-    //     $buku->stok += 1;
-    //     $buku->save();
-    // }
      return back()->with('success', 'Buku berhasil dikembalikan');
 }
 }
