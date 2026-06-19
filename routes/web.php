@@ -14,6 +14,7 @@ use App\Http\Controllers\AuthController;
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'loginProses']);
 Route::get('/logout', [AuthController::class, 'logout']);
+// Route::get('/test-encrypt', [AuthController::class, 'testEncrypt']);
 
 // DASHBOARD
 use App\Http\Controllers\DashboardController;

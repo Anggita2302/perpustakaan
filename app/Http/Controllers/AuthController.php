@@ -8,7 +8,7 @@ use App\Models\Anggota;
 
 class AuthController extends Controller
 {
-    private $key = "UNISLA";
+    private $key = "PERPUS";
 
     // FUNGSI ENKRIPSI VIGENERE
     private function encryptVigenere($text)
